@@ -1,0 +1,81 @@
+<h1>Your Purchase</h1>
+<% if @purchase.empty? %>
+	<p>You have not yet made a purchase.</p>
+<% end %>
+
+<% total = 0 %>
+<% payment = 0 %>
+<% deposit = 0 %>
+<% balance = 0 %>
+<% threeYrPmt = 0 %>
+<% fourYrPmt = 0 %>
+<% fiveYrPmt = 0%>
+
+<table class = "purchase">	
+	<% @purchase.each do | id, quantity | %>
+	<% vehicle = Vehicle.find_by_id(id) %>
+	<tr>
+		<td rowspan="2">
+			<div class="image">
+				<%= link_to (image_tag vehicle.image_url, :style => "height:80px"), vehicle %>
+			</div>
+		</td>		
+		<td class="legend">Make</td>
+		<td class="legend">Model</td>
+		<td class="legend">Colour</td>
+		<td class="legend">Miles</td>
+		<td class="legend">Owners</td>
+		<td class="legend">Price</td>
+	</tr>
+
+	<tr>
+
+		<td class="make"><%=  vehicle.make %></td>
+		<td class="model"><%=  vehicle.model %></td>
+		<td class="colour"><%=  vehicle.colour %></td>
+		<td class="miles"><%=  vehicle.miles %></td>
+		<td class="owners"><%= vehicle.owners %></td>
+		<td class="owners" id = "currency"><%= number_to_currency(vehicle.price, :unit => "€") %></td>
+	</tr>
+		<% total += quantity * vehicle.price %>
+		<% deposit = total*0.20%>
+		<% balance = total - deposit%>
+		<% end %>
+	<tr>
+		<td colspan="6">
+			<div class="total">Total:</div>
+		</td>
+		<td id = "currency">
+			<div class="price"><%= number_to_currency(total, :unit => "€") %></div>
+		</td>
+	</tr>
+</table>
+<div>
+	<table>
+	<th>The cost of Finance on this vehicle would be as follows</th>
+		<tr>
+			<td>Full Price of Vehicle</td>
+			<td id = "currency"><%= number_to_currency(total, :unit => "€") %></td>
+		</tr>
+		<tr>
+			<td>Deposit 20%</td>
+			<td id = "currency"><%= number_to_currency(deposit, :unit => "€") %></td>
+		</tr>
+		<tr>
+			<td>Balance for Finance</td>
+			<td id = "currency"><%= number_to_currency(balance, :unit => "€") %></td>
+		</tr>
+		<tr>
+			<td>3 years</td>
+			<td id = "currency"><%=  threeYrPmt = number_to_currency(LoanRepayments.new(total, 9.0, 36).calcPmts(), :unit => "€")%></td>
+		</tr>
+		<tr>
+			<td>4 years</td>
+			<td id = "currency"><%=  fourYrPmt = number_to_currency(LoanRepayments.new(total, 9.0, 48).calcPmts(), :unit => "€")%></td>
+		</tr>
+		<tr>
+			<td>5 years</td>
+			<td id = "currency"><%=  fiveYrPmt = number_to_currency(LoanRepayments.new(total, 9.0, 60).calcPmts(), :unit => "€")%></td>
+		</tr>
+	</table>
+</div>	

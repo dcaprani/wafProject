@@ -1,0 +1,45 @@
+<h1>Used Car Forecourt</h1>
+	<table class="catalog">
+	<% @vehicles.in_groups_of(2, false) do |row_vehicles| %>
+		<tr>
+			<% for vehicle in row_vehicles %>
+			<td>
+				<div class="image">
+					<%= link_to (image_tag vehicle.image_url, :style => "height:100px"), vehicle %>
+				</div>
+			</td>
+			<td>
+				<div class="make">
+					<%= link_to vehicle.make, vehicle %>
+				</div>
+				<div class="model">
+					<%=h vehicle.model %>
+				</div>
+				<div class="reg">
+					<%= vehicle.reg %>
+				</div>
+				<div class="colour">
+					<%=h vehicle.colour %>
+				</div>
+				<div class="price">
+					<%= number_to_currency(vehicle.price, :unit => "&euro;") %>
+				</div>
+<!--				<div class="links">
+					<% if session[:login] == 1 %>		
+						<%= link_to 'Edit', edit_vehicle_path(vehicle) %> |
+						<%= link_to 'Destroy', vehicle, :confirm => 'Are you sure?', :method => :delete %>
+					<% else %>
+						<a href = "/purchase/<%= vehicle.id %>">Purchase</a><br><br>
+					<% end %>
+				</div>-->
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+	</table>
+	
+
+
+
+
+

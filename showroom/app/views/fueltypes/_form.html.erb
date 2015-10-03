@@ -1,0 +1,21 @@
+<%= form_for(@fueltype) do |f| %>
+  <% if @fueltype.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fueltype.errors.count, "error") %> prohibited this fueltype from being saved:</h2>
+
+      <ul>
+      <% @fueltype.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fuel_type %><br />
+    <%= f.text_field :fuel_type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

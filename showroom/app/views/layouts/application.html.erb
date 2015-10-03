@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Showroom</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<body> 
+	<div id='header'> 
+		<!-- Header Image Displayes here --> 
+	</div> 
+	<div id='menu'> 
+		<div id="navbar"> 
+			<ul> 
+				<li><a href="/vehicles">Vehicles</a></li>
+				<li><a href="/vehicles/new">Upload New Vehicle</a></li>
+				<li><a href="/contact">Contact Us</a></li>
+				<li>
+				<% if user_signed_in?%>
+					Signed in as .... <% current_user.email %>(<%= link_to 'Sign out', destroy_user_session_path, :method => :delete%>)
+				<%else%>
+					 <%= link_to 'Sign in', new_user_session_path %> or <%= link_to 'Register', new_user_registration_path %> 
+				<% end %>
+				</li>
+			</ul> 
+		</div> 
+	</div> 
+	<div id='container'> 
+		<div id='content'> 
+			<p class="notice"><%= flash[:notice] %></p>
+       		<p class="alert"><%= alert %></p>
+			<%= yield %> 
+
+		</div> 
+		<div id='first-column'> 
+			<div class="loginbox"> 
+				<h2 class="BoxHeaders">Login Here....</h2>
+			<% if user_signed_in?%>
+				<div> Signed in as .... <% current_user.email %>(<%= link_to 'Sign out', destroy_user_session_path, :method => :delete%>)</div>
+			<%else%>
+				<%= link_to 'Register', new_user_registration_path %> or <%= link_to 'Sign in', new_user_session_path %>
+			<% end %>
+			</div> 
+			<div class="searchbox"> 
+				<h2 class="BoxHeaders">Search Showroom</h2> 
+				<%= render :partial => 'vehicles/search'%>
+			</div> 
+		</div> 
+	</div> 
+	<div id='footer'> 
+		<h6 class="footertext">&copy; Online Showroom &trade; 2013</h6> 
+	</div>
+</body>
+</html>

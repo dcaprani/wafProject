@@ -1,0 +1,77 @@
+<%= form_for(@vehicle, :html => {:multipart => true}) do |f| %>
+  <% if @vehicle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vehicle.errors.count, "error") %> prohibited this vehicle from being saved:</h2>
+
+      <ul>
+      <% @vehicle.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :make %><br />
+    <%= f.text_field :make %>
+  </div>
+  <div class="field">
+    <%= f.label :model %><br />
+    <%= f.text_field :model %>
+  </div>
+   <div class="field">
+    <%= f.label :reg %><br />
+    <%= f.text_field :reg %>
+  </div>
+  <div class="field">
+    <%= f.label :colour %><br />
+    <%= f.text_field :colour %>
+  </div>
+  <div class="field">
+    <%= f.label :miles %><br />
+    <%= f.number_field :miles %>
+  </div>
+  <div class="field">
+    <%= f.label :owners %><br />
+    <%= f.number_field :owners %>
+  </div> 
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br />
+    <%= f.file_field :image %>
+  </div>
+
+	<div id = "extras">	
+	  	<div class = "field">
+	  		NCT'd:
+	  		<%= check_box_tag 'vehicle[NCT]', 'NCT'%>
+	  	</div>
+	  	<div class = "field">
+	  		Taxed:
+	  		<%= check_box_tag 'vehicle[Taxed]', 'Taxed'%>
+	  	</div>
+	  	<div class = "field">
+	  		Extended Warranty:
+	  		<%= check_box_tag 'vehicle[ExtendedWarranty]', 'ExtendedWarranty'%>
+	  	</div>  
+	  	<div class = "field">
+	  		Car Has Been Crashed:
+	  		<%= check_box_tag 'vehicle[Crashed]', 'Crashed'%>
+	  	</div>
+	  
+		<div class="actions" style="float: left">
+			<%= f.submit %>
+		</div> 
+	</div>  
+
+ 
+  
+  
+<% end %>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  make: MyString
+  model: MyString
+  colour: MyString
+  miles: 1
+  owners: 1
+  price: 9.99
+  image: MyString
+
+two:
+  make: MyString
+  model: MyString
+  colour: MyString
+  miles: 1
+  owners: 1
+  price: 9.99
+  image: MyString

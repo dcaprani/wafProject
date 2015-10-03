@@ -1,0 +1,9 @@
+<% @vehicles = Vehicle.select('DISTINCT fueltype')%>
+<div class = "fueltypeListAll">>
+	<% @vehicles.each do |f| %>
+		<a href = "/fueltype/<%= f.fueltype %>" id = "fueltypelisting"><%= f.fueltype%></a>
+		<br/>
+	<%end%>
+	
+	<%= render '/vehicles/categoryDistinctList' %>		
+</div>

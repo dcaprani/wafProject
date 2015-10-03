@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Make:</b>
+  <%= @vehicle.make %>
+</p>
+
+<p>
+  <b>Model:</b>
+  <%= @vehicle.model %>
+</p>
+<p>
+	<b>Reg:</b><%= @vehicle.reg%>   <%= CheckCrashCar.new(@vehicle.reg).outputResult()%>
+	
+</p>
+
+<p>
+  <b>Colour:</b>
+  <%= @vehicle.colour %>
+</p>
+
+<p>
+  <b>Miles:</b>
+  <%= @vehicle.miles %>
+</p>
+
+<p>
+  <b>Owners:</b>
+  <%= @vehicle.owners %>
+</p>
+<p>
+	<b>Description</b>
+	<%= @vehicle.description %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= number_to_currency(@vehicle.price, :unit => "€") %>
+</p>
+
+<p>
+  <%= image_tag @vehicle.image_url.to_s %>
+</p>
+
+<div class="links">
+	<% if session[:login] == 1 %>		
+		<%= link_to 'Edit', edit_vehicle_path(vehicle) %> |
+		<%= link_to 'Destroy', vehicle, :confirm => 'Are you sure?', :method => :delete %>
+	<% else %>
+		<a href = "/purchase/<%= @vehicle.id %>">Purchase</a><br><br>
+	<% end %>
+</div>
+<%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
+<%= link_to 'Back', vehicles_path %>
